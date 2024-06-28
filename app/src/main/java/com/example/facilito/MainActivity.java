@@ -1,11 +1,13 @@
 package com.example.facilito;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.facilito.ui.login.HomeActivity;
@@ -13,6 +15,7 @@ import com.example.facilito.ui.login.LoginActivity;
 import com.example.facilito.ui.user.ConfigPantallaActivity;
 import com.example.facilito.ui.user.FavoritosActivity;
 import com.example.facilito.ui.user.PedidosActivity;
+import com.example.facilito.ui.user.UpdateActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
+    private TextView tvUsuario, tvDni;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        MenuItem logoutItem = navigationView.getMenu().findItem(R.id.navLogout);
+        MenuItem updateItem = navigationView.getMenu().findItem(R.id.navUpdate);
+        activateItem(updateItem);
+        activateItem(logoutItem);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -90,7 +100,14 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
+                } else if(id == R.id.navLogout){
+                    logout();
+                    updateTextView();
+                } else if(id == R.id.navUpdate){
+                    Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
                     return false;
                 }
 
@@ -104,8 +121,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 drawer.openDrawer(GravityCompat.START);
+                updateTextView();
             }
         });
+        View headerView = navigationView.getHeaderView(0);
+        tvUsuario = headerView.findViewById(R.id.tvUsuario);
+        tvDni = headerView.findViewById(R.id.tvDni);
     }
 
     @Override
@@ -120,8 +141,33 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
-    //public void goToLogin(MenuItem item){
-        //Intent intent = new Intent(this, LoginActivity.class);
-        //startActivity(intent);
-    //}
+
+    public void updateTextView(){
+        String usuario = getSharedPreferences("my_preferences", MODE_PRIVATE).getString("nombre", "");
+        Long dni = getSharedPreferences("my_preferences", MODE_PRIVATE).getLong("dni",0);
+        tvUsuario.setText(usuario);
+        if(dni != 0)
+            tvDni.setText("DNI:" + dni);
+    }
+
+    public void logout(){
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void activateItem(MenuItem item){
+        if(isLogged())
+            item.setVisible(true);
+    }
+
+    public boolean isLogged(){
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+        return sharedPreferences.contains("nombre");
+    }
+
 }

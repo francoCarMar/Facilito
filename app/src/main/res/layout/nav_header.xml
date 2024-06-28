@@ -16,7 +16,8 @@
         android:src="@drawable/ic_user_placeholder" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvUsuario"
+        android:layout_width="201dp"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Usuario Invitado (a)"
@@ -25,7 +26,8 @@
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="67dp"
+        android:id="@+id/tvDni"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:text="DNI:"
