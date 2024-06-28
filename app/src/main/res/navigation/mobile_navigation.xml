@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_grifo">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.facilito.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_grifo"
+        android:name="com.example.facilito.ui.componentes.menu.grifo.GrifoFragment"
+        android:label="@string/title_grifo"
+        tools:layout="@layout/fragment_grifo" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.facilito.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_balon"
+        android:name="com.example.facilito.ui.componentes.menu.balon.BalonFragment"
+        android:label="@string/title_balon"
+        tools:layout="@layout/fragment_balon" />
+    <fragment
+        android:id="@+id/navigation_electricidad"
+        android:name="com.example.facilito.ui.componentes.menu.electricidad.ElectricidadFragment"
+        android:label="@string/title_electricidad"
+        tools:layout="@layout/fragment_electricidad" />
+    <fragment
+        android:id="@+id/navigation_gas"
+        android:name="com.example.facilito.ui.componentes.menu.gas.GasFragment"
+        android:label="@string/title_gas"
+        tools:layout="@layout/fragment_gas" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.facilito.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_tramites"
+        android:name="com.example.facilito.ui.componentes.menu.tramites.TramitesFragment"
+        android:label="@string/title_tramites"
+        tools:layout="@layout/fragment_tramites" />
 </navigation>

@@ -1,16 +1,15 @@
-package com.example.facilito.ui.dashboard;
+package com.example.facilito.ui.componentes.menu.balon;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
-
+public class BalonViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public BalonViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is Balon fragment");
     }
 
     public LiveData<String> getText() {

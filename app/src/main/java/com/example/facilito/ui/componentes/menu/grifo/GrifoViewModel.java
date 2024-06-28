@@ -1,16 +1,16 @@
-package com.example.facilito.ui.home;
+package com.example.facilito.ui.componentes.menu.grifo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class GrifoViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public GrifoViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is grifo fragment");
     }
 
     public LiveData<String> getText() {

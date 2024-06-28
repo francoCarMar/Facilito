@@ -83,9 +83,8 @@ public class LoginActivity extends BaseActivity{
             }
         });
     }
-    public void goToRegister(View v){
+    public void goToRegister(View v) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
 }

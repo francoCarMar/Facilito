@@ -2,9 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_login"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:onClick="goToLogin"
-        android:title="@string/login"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/navFavorites"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="@string/favoritos" />
+    <item
+        android:id="@+id/navOrders"
+        android:icon="@android:drawable/checkbox_on_background"
+        android:title="@string/pedidos" />
+    <item
+        android:id="@+id/navHome"
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:title="@string/pantalla" />
+    <item
+        android:id="@+id/navLogin"
+        android:icon="?attr/actionModeCloseDrawable"
+        android:title="@string/iniciar_sesion" />
 </menu>
