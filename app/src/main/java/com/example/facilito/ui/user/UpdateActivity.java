@@ -1,5 +1,6 @@
 package com.example.facilito.ui.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ public class UpdateActivity extends BaseActivity {
     private EditText correo,dni, nombre, apellidos;
     private TextView result;
     private UserManager userManager;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +34,23 @@ public class UpdateActivity extends BaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        preferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
         correo = findViewById(R.id.etCorreo);
+        correo.setText(preferences.getString("correo", ""));
         dni = findViewById(R.id.etDni);
+        Long numberDNI = getSharedPreferences("my_preferences", MODE_PRIVATE).getLong("dni", -1);
+        dni.setText(String.valueOf(numberDNI));
         nombre = findViewById(R.id.etNombre);
+        nombre.setText(preferences.getString("nombre", ""));
         apellidos = findViewById(R.id.etApellidos);
+        apellidos.setText(preferences.getString("apellido", ""));
         userManager = new UserManager(this);
     }
 
     public void update(View v){
 
-        String c1 = getSharedPreferences("my_preferences", MODE_PRIVATE).getString("correo", "");
+        String c1 = preferences.getString("correo", "");
         String c2 = correo.getText().toString().trim();
         Long d = Long.parseLong(dni.getText().toString().trim());
         String n = nombre.getText().toString().trim();
