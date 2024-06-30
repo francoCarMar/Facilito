@@ -44,8 +44,11 @@ public class LoginActivity extends BaseActivity{
     public void login(View v){
         String c = correo.getText().toString().trim();
         String p = password.getText().toString().trim();
-        authManager.login(c,p);
-        userManager.getUser(c);
+        if(c.isEmpty() || p.isEmpty()){
+            result.setText("Complete los campos");
+            return;
+        }
+        authManager.login(c,p,result);
     }
     public void goToRegister(View v) {
         Intent intent = new Intent(this, RegisterActivity.class);
