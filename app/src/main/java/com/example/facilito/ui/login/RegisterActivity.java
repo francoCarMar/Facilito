@@ -60,6 +60,10 @@ public class RegisterActivity extends BaseActivity {
         String n = nombre.getText().toString().trim();
         String a = apellidos.getText().toString().trim();
         String p = password.getText().toString().trim();
+        if(c.isEmpty() || n.isEmpty() || a.isEmpty() || p.isEmpty()){
+            result.setText("Complete los campos");
+            return;
+        }
         AuthService.RegisterRequest registerRequest = new AuthService.RegisterRequest(c,d,n,a,p);
 
         Call<Void> call = authService.register(registerRequest);

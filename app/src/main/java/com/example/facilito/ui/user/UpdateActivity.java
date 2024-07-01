@@ -55,6 +55,10 @@ public class UpdateActivity extends BaseActivity {
         Long d = Long.parseLong(dni.getText().toString().trim());
         String n = nombre.getText().toString().trim();
         String a = apellidos.getText().toString().trim();
+        if(c2.isEmpty() || n.isEmpty() || a.isEmpty()){
+            result.setText("Complete los campos");
+            return;
+        }
         userManager.updateUser(c1,c2, n, a, d);
 
     }
