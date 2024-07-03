@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private TextView tvUsuario, tvDni;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +71,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        MenuItem logoutItem = navigationView.getMenu().findItem(R.id.navLogout);
-        MenuItem updateItem = navigationView.getMenu().findItem(R.id.navUpdate);
-        activateItem(updateItem);
-        activateItem(logoutItem);
-
+        // Manejo de elementos del menú de navegación
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -107,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     return false;
                 }
 
@@ -124,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 updateTextView();
             }
         });
+
         View headerView = navigationView.getHeaderView(0);
         tvUsuario = headerView.findViewById(R.id.tvUsuario);
         tvDni = headerView.findViewById(R.id.tvDni);
@@ -142,15 +138,16 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
-    public void updateTextView(){
+    public void updateTextView() {
         String usuario = getSharedPreferences("my_preferences", MODE_PRIVATE).getString("nombre", "");
-        Long dni = getSharedPreferences("my_preferences", MODE_PRIVATE).getLong("dni",0);
+        Long dni = getSharedPreferences("my_preferences", MODE_PRIVATE).getLong("dni", 0);
         tvUsuario.setText(usuario);
-        if(dni != 0)
+        if (dni != 0) {
             tvDni.setText("DNI:" + dni);
+        }
     }
 
-    public void logout(){
+    public void logout() {
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
@@ -160,12 +157,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void activateItem(MenuItem item){
-        if(isLogged())
+    public void activateItem(MenuItem item) {
+        if (isLogged()) {
             item.setVisible(true);
+        }
     }
 
-    public boolean isLogged(){
+    public boolean isLogged() {
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
         return sharedPreferences.contains("nombre");
     }
