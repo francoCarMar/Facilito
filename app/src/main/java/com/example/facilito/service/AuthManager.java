@@ -22,6 +22,13 @@ public class AuthManager {
     private AuthService authService;
     private Context context;
 
+    public void setAuthService(AuthService authService) {
+        this.authService = authService;
+    }
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     public AuthManager(Context context) {
         this.context = context;
         Retrofit retrofit = new Retrofit.Builder()
@@ -44,6 +51,7 @@ public class AuthManager {
                     UserResponse userResponse = response.body();
                     if (userResponse != null) {
                         savedSession(userResponse);
+
                         Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show();
                         context.startActivity(new Intent(context, MainActivity.class));
                     } else {
@@ -59,7 +67,6 @@ public class AuthManager {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 String fail = "Login failed: " + t.getMessage();

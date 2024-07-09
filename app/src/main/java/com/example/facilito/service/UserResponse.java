@@ -37,4 +37,11 @@ public class UserResponse {
     public void setDni(Long dni) {
         this.dni = dni;
     }
+
+    public UserResponse(String correo, String nombre, String apellido, Long dni) {
+        this.correo = correo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+    }
 }
