@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("org.sonarqube") version "5.0.0.4638"
-    jacoco
+    id("jacoco")
     id("jacoco-report-aggregation")
 }
 
@@ -65,12 +65,11 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.0.2")
     implementation("com.google.android.gms:play-services-location:21.0.1")
 }
-
 jacoco {
     toolVersion = "0.8.7"
 }
 
-tasks.register<JacocoReport>("jacocoTestReport") {
+tasks.register("jacocoTestReport", JacocoReport::class) {
     dependsOn(tasks.named("testDebugUnitTest"))
 
     reports {
@@ -79,12 +78,6 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         csv.required.set(false)
     }
 
-    classDirectories.setFrom(
-        fileTree(mapOf("dir" to "${project.buildDir}/intermediates/javac/debug", "includes" to listOf("**/classes/**/main/**")))
-    )
-
-    sourceDirectories.setFrom(files("${projectDir}/src/main/java"))
-    executionData.setFrom(fileTree(mapOf("dir" to project.buildDir, "includes" to listOf("jacoco/testDebugUnitTest.exec"))))
 }
 
 tasks.named("check") {
